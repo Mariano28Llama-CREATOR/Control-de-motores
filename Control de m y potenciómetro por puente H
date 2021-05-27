@@ -1,0 +1,25 @@
+int pin2 = 9;
+int pin7 = 10;
+int pot = A0;
+
+int valpot;
+int adelante;
+int atras;
+
+void setup()
+{
+  pinMode(pin2, OUTPUT);
+  pinMode(pin7,OUTPUT);
+  pinMode(13, OUTPUT);
+}
+
+void loop()
+{
+  valpot = analogRead(pot);
+  adelante = map (valpot, 0, 1023, 100, 255);
+  atras = map (valpot, 0, 1023, 255, 100);
+  
+  analogWrite(pin2, adelante);
+  analogWrite(pin7, atras);
+  digitalWrite(13, HIGH);
+}
