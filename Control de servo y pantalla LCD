@@ -1,0 +1,36 @@
+#include <LiquidCrystal.h>
+#include <Servo.h>
+
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2); //(RS, RW, E, D4,D5, D6, D7)
+Servo palanca;
+
+int grados;
+
+void setup()
+{
+  lcd.begin(16, 2);
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Angulo");
+  pinMode(A0, INPUT);
+  palanca.attach(1);
+}
+
+void loop()
+{
+  grados = map (analogRead(A0), 0, 1023, 0, 180);
+  
+  lcd.setCursor(0, 0);
+  lcd.print("Angulo");
+  
+  palanca.write(grados);
+  lcd.setCursor(0, 1);
+  lcd.print("Grados: ");
+  lcd.print(grados,1);
+
+  lcd.noCursor();
+  delay(500);
+  lcd.cursor();
+  delay(500);
+  lcd.clear();
+}
